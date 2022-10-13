@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.itwillbs.mapper.NoticeMapper">
+
+	<!-- 공지사항 최신 번호 -->
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		select max(notice_num) from notice_board
+	</select>
+	
+	<!-- 공지사항 작성 -->
+	<insert id="insertNotice">
+		insert into notice_board (notice_num, pass, name, subject, 
+		content, readcount, re_ref, re_lev, re_seq, regdate, ip, file)
+		values (#{notice_num},#{pass},#{name},#{subject},
+		#{content},#{readcount},#{re_ref},#{re_lev},#{re_seq},now(),#{ip},#{file})
+	</insert>
+	
+	<!-- 공지사항 리스트 -->
+	<select id="noticeList" resultType="com.itwillbs.domain.NoticeVO">
+		select * from notice_board
+	</select>
+	
+	<!-- 공지사항 내용 -->
+	
+	
+	<!-- 공지사항 수정 -->
+	
+	
+	<!-- 공지사항 삭제 -->
+	
+</mapper>
