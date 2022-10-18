@@ -38,7 +38,7 @@
 <!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
 <ul>
-<li><a href="#">Notice</a></li>
+<li><a href="${pageContext.request.contextPath }/notice/list?pageNum=1">Notice</a></li>
 <li><a href="#">Public News</a></li>
 <li><a href="#">Driver Download</a></li>
 <li><a href="#">Service Policy</a></li>
@@ -55,23 +55,23 @@
     <th class="twrite">Writer</th>
     <th class="tdate">Date</th>
     <th class="tread">Read</th></tr>
-    <c:forEach var="dto" items="${noticeList }">
-    <tr><td>${vo.notice_num }</td>
-    <td class="left"><a href="./BoardContent.bo?bno=${vo.notice_num }">${vo.subject }</a></td>
-    <td>${vo.name }</td>
-    <td><fmt:formatDate value="${vo.regdate }" pattern="yyyy.MM.dd"/> </td><td>${vo.readcount }</td></tr>
+    <c:forEach var="list" items="${list }">
+    <tr><td>${list.notice_num }</td>
+    <td class="left"><a href="${pageContext.request.contextPath }/noticeContent?notice_num=${list.notice_num }">${list.subject }</a></td>
+    <td>${list.name }</td>
+    <td><fmt:formatDate value="${list.regdate }" pattern="yyyy.MM.dd"/> </td><td>${list.readcount }</td></tr>
     </c:forEach>
 
 </table>
 
 <div id="table_search">
 <c:if test="${!(empty sessionScope.loginID) }">
-<input type="button" value="글쓰기" class="btn" onclick="location.href='./BoardWrite.bo'">
+<input type="button" value="글쓰기" class="btn" onclick="location.href='${pageContext.request.contextPath }/notice/write';">
 </c:if>
 </div>
 
 <div id="table_search">
-<form action="./BoardListSearch.bo" name="fr" method="get">
+<form action="${pageContext.request.contextPath }/notice/search" name="fr" method="get">
 <input type="text" name="search" class="input_box">
 <input type="submit" value="search" class="btn">
 </form>
@@ -80,16 +80,16 @@
 <div class="clear"></div>
 <div id="page_control">
 
-<c:if test="${startPage > pageBlock }">
-	<a href="./BoardList.bo?pageNum=${startPage - pageBlock}">Prev</a>
+<c:if test="${vo.startPage > vo.pageBlock }">
+	<a href="${pageContext.request.contextPath }/notice/list?pageNum=${vo.startPage-vo.pageBlock}">Prev</a>
 </c:if>
 
-<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-	<a href="./BoardList.bo?pageNum=${i }">${i }</a>
+<c:forEach var="i" begin="${vo.startPage }" end="${vo.endPage }" step="1">
+	<a href="${pageContext.request.contextPath }/notice/list?pageNum=${i }">${i }</a>
 </c:forEach>
 
-<c:if test="${endPage < pageCount }">
-	<a href="./BoardList.bo?pageNum=${startPage + pageBlock}">Next</a>
+<c:if test="${vo.endPage < vo.pageCount }">
+	<a href="/notice/list?pageNum=${vo.startPage + vo.pageBlock}">Next</a>
 </c:if>
 
 </div>

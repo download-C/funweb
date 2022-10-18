@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.service.MemberService;
+import com.itwillbs.service.NoticeService;
 
 @RestController
 public class AjaxController {
@@ -21,6 +24,9 @@ public class AjaxController {
 //	MemberService memberService=new MemberServiceImpl();
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private NoticeService NoticeService;
 	
 	//http://localhost:8080/FunWeb/member/idcheck
 	//http://localhost:8080/FunWeb/member/idcheck?id=itwill01
@@ -50,6 +56,22 @@ public class AjaxController {
 
 		ResponseEntity<List<MemberVO>> entity=
 				new ResponseEntity<List<MemberVO>>(list,HttpStatus.OK);
+		// List<MemberVO> => 자동으로 json 변경하는 프로그램 설치
+		// jackson-databind
+		return entity;
+	}
+	
+	@RequestMapping(value = "/notice/listJson", method = RequestMethod.GET)
+	public ResponseEntity<List<NoticeVO>> list2(HttpServletRequest request) {
+		PageVO vo = new PageVO();
+		vo.setPageNum("1");
+		vo.setPageSize(5);
+		vo.setCurrentPage(1);
+		
+		List<NoticeVO> list2= NoticeService.getNoticeList(vo);
+
+		ResponseEntity<List<NoticeVO>> entity=
+				new ResponseEntity<List<NoticeVO>>(list2,HttpStatus.OK);
 		// List<MemberVO> => 자동으로 json 변경하는 프로그램 설치
 		// jackson-databind
 		return entity;

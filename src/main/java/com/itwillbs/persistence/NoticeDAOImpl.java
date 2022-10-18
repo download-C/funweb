@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.PageVO;
 
 @Repository
 public class NoticeDAOImpl implements NoticeDAO{
@@ -31,10 +32,25 @@ public class NoticeDAOImpl implements NoticeDAO{
 	}
 
 	@Override
-	public List<NoticeVO> getNoticeList() {
+	public List<NoticeVO> getNoticeList(PageVO vo) {
 		List<NoticeVO> noticeList = new ArrayList<NoticeVO>();
-		session.selectList(NAMESPACE+".noticeList");
+		noticeList = session.selectList(NAMESPACE+".getNoticeList", vo);
 		return noticeList;
+	}
+
+	@Override
+	public int getNoticeCount() {
+		return session.selectOne(NAMESPACE+".getNoticeCount");
+	}
+
+	@Override
+	public List<NoticeVO> getNoticeListSearch(PageVO vo) {
+		return session.selectList(NAMESPACE+".getNoticeListSearch",vo);
+	}
+
+	@Override
+	public int getNoticeCountSearch(PageVO vo) {
+		return session.selectOne(NAMESPACE+".getNoticeCountSearch",vo);
 	}
 
 //

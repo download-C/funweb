@@ -1,11 +1,14 @@
 package com.itwillbs.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.itwillbs.domain.NoticeVO;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.persistence.NoticeDAO;
 
 @Service
@@ -33,8 +36,38 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public void getNoticeList() {
+	public List<NoticeVO> getNoticeList(PageVO vo) {
+		// startRow, endRow 구하기
+		int startRow = (vo.getCurrentPage()-1)*vo.getPageSize()+1;
+		int endRow = vo.getCurrentPage()*vo.getPageSize();
 		
+		// #{startRow}-1
+		vo.setStartRow(startRow-1);
+		vo.setEndRow(endRow);
 		
+		return dao.getNoticeList(vo);
+	}
+
+	@Override
+	public int getNoticeCount() {
+		return dao.getNoticeCount();
+	}
+
+	@Override
+	public List<NoticeVO> getNoticeListSearch(PageVO vo) {
+		// startRow, endRow 구하기
+		int startRow = (vo.getCurrentPage()-1)*vo.getPageSize()+1;
+		int endRow = vo.getCurrentPage()*vo.getPageSize();
+		
+		// #{startRow}-1
+		vo.setStartRow(startRow-1);
+		vo.setEndRow(endRow);
+		
+		return dao.getNoticeListSearch(vo);
+	}
+
+	@Override
+	public int getNoticeCountSearch(PageVO vo) {
+		return dao.getNoticeCountSearch(vo);
 	}
 }

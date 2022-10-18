@@ -28,9 +28,9 @@
 <nav id="top_menu">
 <ul>
 	<li><a href="${pageContext.request.contextPath }/main/main">HOME</a></li>
-	<li><a href="${pageContext.request.contextPath }/company/welcome">COMPANY</a></li>
+	<li><a href="#">COMPANY</a></li>
 	<li><a href="#">SOLUTIONS</a></li>
-	<li><a href="${pageContext.request.contextPath }/center/notice">CUSTOMER CENTER</a></li>
+	<li><a href="${pageContext.request.contextPath }/notice/list">CUSTOMER CENTER</a></li>
 	<li><a href="#">CONTACT US</a></li>
 </ul>			
 

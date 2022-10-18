@@ -88,24 +88,25 @@ public class MemberDAOImpl implements MemberDAO {
 		log.info("loginMember(userid,userpw) 호출");
 		
 		// mapper에 정보를 1개만 전달 가능
-		//sqlSession.selectOne(NAMESPACE+".loginMember",userid,userpw);(x)
+//		sqlSession.selectOne(NAMESPACE+".loginMember",userid,userpw);(x)
 		
 		// 전달된 정보를 하나의 도메인 객체에 저장후 처리
-		//		MemberVO vo = new MemberVO();
-		//		vo.setUserid(userid);
-		//		vo.setUserpw(userpw);
-		//	
-		//		sqlSession.selectOne(NAMESPACE+".loginMember",vo);
+				MemberVO vo = new MemberVO();
+				vo.setUserid(userid);
+				vo.setUserpw(userpw);
+				log.info("userid: "+userid+", userpw: "+userpw);
+
+				return sqlSession.selectOne(NAMESPACE+".loginMember",vo);
 		
 		// 회원정보  + 게시판정보 => 하나의 도메인(MemberVO) 저장 X
 		// => 컬렉션을 사용 (연관없는 데이터를 한번에 저장)
 		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		//paramMap.put("컬럼명", 데이터값);
-		paramMap.put("userid", userid);
-		paramMap.put("userpw", userpw);
-		
-		return sqlSession.selectOne(NAMESPACE+".loginMember",paramMap);
+//		Map<String, Object> paramMap = new HashMap<String, Object>();
+//		//paramMap.put("컬럼명", 데이터값);
+//		paramMap.put("userid", userid);
+//		paramMap.put("userpw", userpw);
+//		log.info("userid: "+userid+", userpw: "+userpw);
+//		return sqlSession.selectOne(NAMESPACE+".loginMember",paramMap);
 	}
 
 

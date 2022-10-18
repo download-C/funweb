@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="./css/default.css" rel="stylesheet" type="text/css">
-<link href="./css/subpage.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/resources/css/subpage.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/ie7-squish.js" type="text/javascript"></script>
@@ -55,23 +55,23 @@
     <th class="twrite">Writer</th>
     <th class="tdate">Date</th>
     <th class="tread">Read</th></tr>
-    <c:forEach var="dto" items="${boardList }">
-    <tr><td>${dto.bno }</td>
-    <td class="left"><a href="./BoardContent.bo?bno=${dto.bno }">${dto.subject }</a></td>
-    <td>${dto.name }</td>
-    <td><fmt:formatDate value="${dto.date }" pattern="yyyy.MM.dd"/> </td><td>${dto.readcount }</td></tr>
+    <c:forEach var="list" items="${list }">
+    <tr><td>${list.notice_num }</td>
+    <td class="left"><a href="${pageContext.request.contextPath }/notice/count?bno=${list.notice_num }">${list.subject }</a></td>
+    <td>${list.name }</td>
+    <td><fmt:formatDate value="${list.regdate }" pattern="yyyy.MM.dd"/> </td><td>${list.readcount }</td></tr>
     </c:forEach>
 
 </table>
 
 <div id="table_search">
 <c:if test="${!(empty sessionScope.loginID) }">
-<input type="button" value="글쓰기" class="btn" onclick="location.href='./BoardWrite.bo'">
+<input type="button" value="글쓰기" class="btn" onclick="location.href='${pageContext.request.contextPath }/notice/write';">
 </c:if>
 </div>
 
 <div id="table_search">
-<form action="./BoardListSearch.bo" name="fr" method="get">
+<form action="${pageContext.request.contextPath }/notice/search" name="fr" method="get">
 <input type="text" name="search" class="input_box">
 <input type="submit" value="search" class="btn">
 </form>
@@ -80,16 +80,16 @@
 <div class="clear"></div>
 <div id="page_control">
 
-<c:if test="${startPage > pageBlock }">
-	<a href="./BoardListSearch.bo?pageNum=${startPage - pageBlock}&search=${search}">Prev</a>
+<c:if test="${vo.startPage > vo.pageBlock }">
+	<a href="${pageContext.request.contextPath }/notice/search?pageNum=${vo.startPage - vo.pageBlock}&search=${search}">Prev</a>
 </c:if>
 
-<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
-	<a href="./BoardListSearch.bo?pageNum=${i }&search=${search}">${i }</a>
+<c:forEach var="i" begin="${vo.startPage }" end="${vo.endPage }" step="1">
+	<a href="${pageContext.request.contextPath }/notice/search?pageNum=${i }&search=${search}">${i }</a>
 </c:forEach>
 
-<c:if test="${endPage < pageCount }">
-	<a href="./BoardListSearch.bo?pageNum=${startPage + pageBlock}&search=${search}">Next</a>
+<c:if test="${vo.endPage < vo.pageCount }">
+	<a href="${pageContext.request.contextPath }/notice/search?pageNum=${vo.startPage + vo.pageBlock}&search=${search}">Next</a>
 </c:if>
 
 </div>

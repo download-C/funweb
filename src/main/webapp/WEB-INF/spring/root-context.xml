@@ -15,15 +15,11 @@
 	<!-- 디비연결객체 dataSource -->
 	 <bean id="dataSource" 
 	    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-
-  	    <!-- 기존설정값 -->
-	    
+  	  <!-- 기존설정값 -->
 	    <property name="driverClassName" 
 	              value="com.mysql.cj.jdbc.Driver" />
 	    <property name="url" 
-	    		  value="jdbc:mysql://localhost:3306/springdb"/>
-	    		  
-	    		  
+	    		  	value="jdbc:mysql://localhost:3306/springdb"/>
 	    <property name="username" 
 	              value="root" />
 	    <property name="password" 
